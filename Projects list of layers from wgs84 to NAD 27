@@ -1,0 +1,22 @@
+import arcpy
+ws= "C:\\lamb" # ruta del workspace
+arcpy.env.workspace=ws #Se asigna el workspace
+mxd = arcpy.mapping.MapDocument('CURRENT') #selecciona el mxd actual para la ejecución de comandos
+df = arcpy.mapping.ListDataFrames(mxd, "Layers") [0] #define el primer dataframe de la tabla de visualización
+elements=[1,2,3,4,5,6] #indica cuales layers va a transformar de acuerdo al orden de los layers
+lyrs= arcpy.mapping.ListLayers(mxd) #lista los layers
+LCC="C:\\myshape.prj" #ubicación de un archivo prj que contiene las características de lambert conformal conic
+for ele in elements[::-1]:#hace un for en orden inverso a la lista (esto es para que se vean igual que en la tabla de contenido)
+	project= ws+"\\"+lyrs[ele].name+"_lcc.shp" #ruta donde se guardará el shape
+	arcpy.Project_management(lyrs[ele].dataSource, project, LCC, "NAD_1927_To_WGS_1984_2",lyrs[ele].dataSource[:-3]+"prj") #se proyecta
+	lyr=lyrs[ele].name #obtiene el nombre de cada layer
+	out_layer=lyr+"_lcc.lyr" #le asigna la extensión lyr y se diferencia con "_lcc.lyr"
+	project_lyr=arcpy.MakeFeatureLayer_management(project,out_layer) #crea un feature layer del shape proyectado esto es necesario para después asignale la respectiva simbología
+	arcpy.SaveToLayerFile_management(lyr,out_layer,"RELATIVE") #guarda con ruta relativa el layer proyectado
+	origin=arcpy.SaveToLayerFile_management(lyr,lyr+".lyr","RELATIVE") #guarda con ruta relativa el layer original
+	arcpy.ApplySymbologyFromLayer_management(out_layer, origin)#le aplica la simbología del layer original al layer proyectado layer original
+	arcpy.mapping.RemoveLayer(df, arcpy.mapping.ListLayers(mxd)[1])#remueve de la vista actual el shape proyectado sin lyr
+	arcpy.Delete_management(origin)#borra el archivo lyr original
+arcpy.RefreshTOC() #Se hace un refresh a la tabla de contenido
+arcpy.RefreshActiveView() #Se hace un refresh a la vista activa
+del mxd
