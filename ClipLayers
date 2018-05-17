@@ -1,0 +1,15 @@
+#Funcion que hace un clip de todos los layers considerando uno de los layers como el que corta.
+#Los guarda en la misma ruta donde está el mxd
+#El layer utilizado para cortar debe estar ubicado en la primera posición del dataframe
+def ClipLayers(mxd):
+    import arcpy
+    import math
+    mxd = arcpy.mapping.MapDocument(mxd)
+    rutamxd=mxd.filePath
+    rutaReverse=rutamxd[::-1]
+    Slash=rutaReverse.find("\\")
+    Location=rutamxd[0:len(rutamxd)-Slash]
+    layers=arcpy.mapping.ListLayers(mxd)
+    for layer in layers[1:]:
+        arcpy.Clip_analysis(layer, layers[0], Location+layers[0].name+"_"+layer.name)
+        print ("Se ha creado "+Location+layers[0].name+"_"+layer.name)
