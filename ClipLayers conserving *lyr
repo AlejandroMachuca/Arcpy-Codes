@@ -1,0 +1,27 @@
+Hace un clip de todos los layers considerando uno de los layers, como función. Le asigna también el respectivo *.lyr ya creado y guardado en la PC
+
+#Los guarda en la misma ruta donde está el mxd
+#El layer utilizado para cortar debe estar ubicado en la primera posición del dataframe
+
+def ClipLayers(mxd):#La ruta del mxd debe estar entre comillas dobles y la ruta debe tener doble slash "\\"
+	import arcpy
+	import math
+	mxd = arcpy.mapping.MapDocument(mxd)
+	df = arcpy.mapping.ListDataFrames(mxd,"Layers") [0] 
+	rutamxd=mxd.filePath
+	rutaReverse=rutamxd[::-1]
+	Slash=rutaReverse.find("\\")
+	Location=rutamxd[0:len(rutamxd)-Slash]
+	layers=arcpy.mapping.ListLayers(mxd)
+	for layer in reversed(layers[1::]):
+		project=Location+layer.name+"_"+layers[0].name+".shp" #ruta donde se guardará el shape cortado
+		arcpy.Clip_analysis(layer, layers[0], project)
+		lyr=layer.name #obtiene el nombre de cada layer fuente
+		out_layer=layer.name+"_"+layers[0].name+".lyr" #le asigna la extensión lyr 
+		project_lyr=arcpy.MakeFeatureLayer_management(project,out_layer) #crea un feature layer del shape cortado esto es necesario para después asignale la respectiva simbología
+		arcpy.ApplySymbologyFromLayer_management(out_layer, layer.name)#le aplica la simbología del layer original al layer cortado layer original
+		arcpy.SaveToLayerFile_management(layer.name+"_"+layers[0].name+".lyr",Location+layer.name+"_"+layers[0].name,"RELATIVE") #guarda con ruta relativa el layer cortado
+		print ("Se ha creado "+Location+layer.name+"_"+layers[0].name)
+		
+arcpy.RefreshTOC() #Se hace un refresh a la tabla de contenido
+arcpy.RefreshActiveView() #Se hace un refresh a la vista activa
