@@ -4,9 +4,9 @@
 #The clipped shapes and its *.lyr will be stored in the same path as the current MXD.
 #Los guarda en la misma ruta donde está el mxd
 #El layer utilizado para cortar debe estar ubicado en la primera posición del dataframe
-#Copy under the line and paste it into python in ArcMap. An example to call it: >>> ClipLayers(C:\\Projects\\Myproject.mxd")
+#Copy under the line and paste it into python in ArcMap. An example to call it: >>> ClipLayers("C:\\Projects\\Myproject.mxd")
 #--------------------
-def ClipLayers(mxd):#La ruta del mxd debe estar entre comillas dobles y la ruta debe tener doble slash "\\". Inside the parenthesis you have to copy the entire path of the MXD (you have to save it before, of course), using double slash
+def ClipLayers(mxd):#La ruta del mxd debe estar entre comillas dobles y la ruta debe tener doble slash "\\". Inside the parenthesis you have to copy the entire path of the MXD (you have to save it before, of course), using double slash and double  quotation marks
 	import arcpy
 	import math
 	mxd = arcpy.mapping.MapDocument(mxd)
