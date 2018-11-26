@@ -1,0 +1,9 @@
+def EnumeraLayers(mxd):#Escribe entre comillas dobles la ubicación del mxd. Path in double quotation and double slash. Example: >>>EnumeraLayers("C:\\projects\\myproject.mxd")
+    import arcpy
+    mxd = arcpy.mapping.MapDocument(mxd)
+    lyr_zona1 = arcpy.mapping.ListLayers(mxd)
+    numero=0
+    for ly in lyr_zona1:
+        print str(numero)+" "+ly.name
+        numero=numero+1
+    del mxd
