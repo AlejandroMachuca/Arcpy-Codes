@@ -1,0 +1,8 @@
+import arcpy 
+mapdoc = arcpy.mapping.MapDocument("CURRENT")
+elemlist= arcpy.mapping.ListLayoutElements(mapdoc)
+for elem in elemlist:
+	if elem.name=="goldenratio":#this is the current picture
+		elem.sourceImage = "C:\\Users\\myuser\\Pictures\\Volcanic.jpg"#this is the location of the new picture
+mapdoc.save()
+del mapdoc
