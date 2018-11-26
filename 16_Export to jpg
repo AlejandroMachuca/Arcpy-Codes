@@ -1,0 +1,4 @@
+import arcpy
+mapdoc = arcpy.mapping.MapDocument("CURRENT")
+arcpy.mapping.ExportToJPEG(mapdoc,"C:\\Users\\myuser\\Pictures\\mapa.jpg",resolution=200)
+del mapdoc
