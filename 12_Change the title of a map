@@ -1,0 +1,6 @@
+import arcpy 
+mapdoc = arcpy.mapping.MapDocument("CURRENT")
+title= arcpy.mapping.ListLayoutElements(mapdoc,"TEXT_ELEMENT")[1]#Its sopoused that the title element is in the place 1 (python notation)
+title.text="New Study Area"
+mapdoc.save()
+del mapdoc
