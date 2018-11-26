@@ -12,4 +12,4 @@ def ClipLayers(mxd):#The path has to be in the following notanion: with double q
     layers=arcpy.mapping.ListLayers(mxd)
     for layer in layers[1:]:
         arcpy.Clip_analysis(layer, layers[0], Location+layers[0].name+"_"+layer.name)
-        print ("Se ha creado "+Location+layers[0].name+"_"+layer.name)
+        print ("You have created "+Location+layers[0].name+"_"+layer.name)
