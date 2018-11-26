@@ -1,0 +1,5 @@
+import arcpy 
+mapdoc = arcpy.mapping.MapDocument("CURRENT")
+mapdoc.title = "Final map of study areas"
+mapdoc.save()
+del mapdoc
