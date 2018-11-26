@@ -1,0 +1,5 @@
+import arcpy 
+mapdoc = arcpy.mapping.MapDocument("CURRENT")
+listdf= arcpy.mapping.ListDataFrames(mapdoc)
+print listdf[0].name
+del mapdoc
