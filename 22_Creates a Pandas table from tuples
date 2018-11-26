@@ -1,0 +1,10 @@
+t=(13.881586909819358, -89.52372359855133),(13.881914997387993, -89.52381747586685),(13.881779596225458, -89.52456849439102),(13.881589513690777, -89.52455776555496),(13.88156607884694, -89.52402668817001),(13.88153743625681, -89.52370214087921)
+Tabla=[[0] * 2 for i in range(len(t))] #creates a nule matrix (by row) x 2 colums (Y,X) 
+for i in range (0,len(t)):
+	Tabla[i][0]=t[i][0]
+	Tabla[i][1]=t[i][1]
+print(Tabla)
+import pandas as pd # it will import to pandas
+import os
+colums=['Y', 'X'] #the names of the colums
+df = pd.DataFrame(Tabla, columns=colums) #the table in pandas format
