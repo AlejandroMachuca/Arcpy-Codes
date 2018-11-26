@@ -1,0 +1,6 @@
+import arcpy 
+mapdoc = arcpy.mapping.MapDocument("CURRENT")
+Foto1= arcpy.mapping.ListLayoutElements(mapdoc,"PICTURE_ELEMENT")[0]#considering python notation is located in the firt position
+Foto1.sourceImage="C:\\Users\\myuser\\Pictures\\IMG_9944.JPG"
+mapdoc.save()
+del mapdoc
