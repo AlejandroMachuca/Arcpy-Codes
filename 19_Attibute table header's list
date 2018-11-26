@@ -1,0 +1,7 @@
+import arcpy
+mxd = arcpy.mapping.MapDocument('CURRENT')
+lyr= arcpy.mapping.ListLayers(mxd)[0]
+fieldList = arcpy.ListFields(lyr)
+for field in fieldList:
+	print field.name
+del mxd
