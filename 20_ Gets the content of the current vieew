@@ -1,0 +1,5 @@
+import arcpy
+mxd = arcpy.mapping.MapDocument('CURRENT')  
+df = arcpy.mapping.ListDataFrames(mxd)[0]		    
+ext = df.extent
+print(str(ext.XMin)+","+str(ext.YMin)+","+str(ext.XMax)+","+str(ext.YMax))
