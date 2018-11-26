@@ -1,0 +1,5 @@
+import arcpy
+mxd = arcpy.mapping.MapDocument('CURRENT') 
+df = arcpy.mapping.ListDataFrames(mxd)[0]
+extentGeom = arcpy.Extent(454681.562862,307159.453402,484923.498346,322214.275178) #xmin,ymin,xmax,ymax       
+df.extent = extentGeom
