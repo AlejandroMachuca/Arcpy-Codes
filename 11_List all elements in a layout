@@ -1,0 +1,6 @@
+import arcpy 
+mapdoc = arcpy.mapping.MapDocument("CURRENT")
+elemlist= arcpy.mapping.ListLayoutElements(mapdoc)
+for elem in elemlist:
+	print elem.name + " " + elem.type
+del mapdoc
