@@ -1,0 +1,8 @@
+import arcpy 
+mapdoc = arcpy.mapping.MapDocument("CURRENT")
+lyrlist=arcpy.mapping.ListLayers(mapdoc)
+for lyr in lyrlist:
+	lyr.showlabels = False
+arcpy.RefreshTOC()
+arcpy.RefreshActiveView()
+del lyrlist
