@@ -1,2 +1,2 @@
 # ArcpyCodes
-Many codes I use by using Arcpy
+Many codes I've created in Arcpy
