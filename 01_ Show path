@@ -1,0 +1,5 @@
+import arcpy 
+mapdoc = arcpy.mapping.MapDocument("CURRENT")
+path= mapdoc.filePath
+print path
+del mapdoc
