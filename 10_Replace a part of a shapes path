@@ -1,0 +1,7 @@
+import arcpy 
+mapdoc = arcpy.mapping.MapDocument("CURRENT")
+brokenlist = arcpy.mapping.ListBrokenDataSources(mapdoc)
+for lyr in brokenlist:
+	lyr.findAndReplaceWorkspacePath("F:\\SIG\NATIONAL\\","C:\\SIG_DB\\SIG_LAPTOP\\")
+arcpy.RefreshTOC()
+mapdoc.save()
